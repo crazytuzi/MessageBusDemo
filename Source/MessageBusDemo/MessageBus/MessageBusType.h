@@ -6,16 +6,43 @@
 #include "MessageBusType.generated.h"
 
 USTRUCT()
-struct FTestMessage
+struct FTestPublishMessage
 {
 	GENERATED_USTRUCT_BODY()
 
 	FString Val;
 
-	FTestMessage() = default;
+	FTestPublishMessage() = default;
 
-	explicit FTestMessage(FString InVal):Val(InVal)
+	explicit FTestPublishMessage(FString InVal): Val(InVal)
 	{
-		
+	};
+};
+
+USTRUCT()
+struct FTestRequestMessage
+{
+	GENERATED_USTRUCT_BODY()
+
+	FString Val;
+
+	FTestRequestMessage() = default;
+
+	explicit FTestRequestMessage(FString InVal): Val(InVal)
+	{
+	};
+};
+
+USTRUCT()
+struct FTestReplyMessage
+{
+	GENERATED_USTRUCT_BODY()
+
+	FString Val;
+
+	FTestReplyMessage() = default;
+
+	explicit FTestReplyMessage(FString InVal): Val(InVal)
+	{
 	};
 };

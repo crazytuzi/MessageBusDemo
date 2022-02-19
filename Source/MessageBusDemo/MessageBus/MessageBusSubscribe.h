@@ -28,7 +28,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	void OnReceive(const FTestMessage& Message, const TSharedRef<IMessageContext, ESPMode::ThreadSafe>& Context);
+	void OnReceive(const FTestPublishMessage& Message, const TSharedRef<IMessageContext, ESPMode::ThreadSafe>& Context);
 
 public:
 	/** Holds a pointer to the message bus. */

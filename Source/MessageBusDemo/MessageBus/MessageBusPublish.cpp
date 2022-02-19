@@ -2,7 +2,6 @@
 
 
 #include "MessageBusPublish.h"
-#include "IMessagingModule.h"
 #include "MessageEndpointBuilder.h"
 #include "MessageBusType.h"
 
@@ -29,6 +28,6 @@ void AMessageBusPublish::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	MessageEndpoint->Publish<FTestMessage>(new FTestMessage("Publish-Subscribe"));
+	MessageEndpoint->Publish<FTestPublishMessage>(new FTestPublishMessage("Publish"));
 }
 

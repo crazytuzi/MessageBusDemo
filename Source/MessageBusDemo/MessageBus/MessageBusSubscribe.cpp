@@ -3,6 +3,8 @@
 
 #include "MessageBusSubscribe.h"
 #include "MessageEndpointBuilder.h"
+#include "Kismet/KismetStringLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values
 AMessageBusSubscribe::AMessageBusSubscribe()
@@ -18,10 +20,10 @@ void AMessageBusSubscribe::BeginPlay()
 
 	MessageBus = IMessagingModule::Get().GetDefaultBus();
 
-	MessageEndpoint = FMessageEndpoint::Builder("Publish-Subscribe", MessageBus.ToSharedRef()).Handling<FTestMessage>(
-		this, &AMessageBusSubscribe::OnReceive);
+	MessageEndpoint = FMessageEndpoint::Builder("Publish-Subscribe", MessageBus.ToSharedRef()).Handling<
+		FTestPublishMessage>(this, &AMessageBusSubscribe::OnReceive);
 
-	MessageEndpoint->Subscribe<FTestMessage>();
+	MessageEndpoint->Subscribe<FTestPublishMessage>();
 }
 
 // Called every frame
@@ -30,8 +32,10 @@ void AMessageBusSubscribe::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AMessageBusSubscribe::OnReceive(const FTestMessage& Message,
+void AMessageBusSubscribe::OnReceive(const FTestPublishMessage& Message,
                                      const TSharedRef<IMessageContext, ESPMode::ThreadSafe>& Context)
 {
-	UE_LOG(LogTemp, Log, TEXT("AMessageBusSubscribe::OnReceive => %s"), *Message.Val);
+	UE_LOG(LogTemp, Log, TEXT("AMessageBusSubscribe::OnReceive IsDedicatedServer:%s Name:%s => %s"),
+	       *UKismetStringLibrary::Conv_BoolToString(UKismetSystemLibrary::IsDedicatedServer(GetWorld())), *GetName(),
+	       *Message.Val);
 }

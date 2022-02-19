@@ -9,5 +9,12 @@ public class MessageBusDemo : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay" });
+		
+		PrivateIncludePathModuleNames.AddRange(
+			new string[] {
+				"Messaging",
+				"MessagingCommon",
+			}
+		);
 	}
 }
